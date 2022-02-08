@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    子集问题2
+    1.数据存在重复
+    2.要求子集不可重复
+    */
+    var subsets = function(nums) {
+      let res = [];
+      let path = [];
+      const judge = (b,s) => {
+        if(!s.length) return false;
+        
+        for(let i=0;i<b.length;i++) {
+          if(b[i].length!==s.length) continue;
+          let tmp = true;//相同
+          for(let j=0;j<b[i].length;j++) {
+            if(b[i][j]!==s[j]) {tmp=false;break;};
+          }
+          if(tmp) return tmp;
+        }
+       return false;
+      }
+      const main = (index) => {
+        
+        let s = path.slice().sort((a,b)=>{return a-b});
+        
+        if(!judge(res,s)) res.push(s);
+        
+        for(let i=index;i<nums.length;i++) {
+          path.push(nums[i]);
+          main(i+1);
+          path.pop();
+        }
+      }
+      main(0);
+      return res;
+    }
+
+    console.log(subsets([2,1,2]));
+  </script>
+</body>
+</html>

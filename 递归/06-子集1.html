@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    子集问题
+    1.子集问题和组合问题可以类比
+    2.子集是每一步都保存，而组合是达到指定数才保存
+    */
+    var subsets = function(nums) {
+      let res = [];
+      let path = [];
+   
+      const main = (index) => {
+        res.push([...path]);
+        
+        for(let i=index;i<nums.length;i++) {
+          path.push(nums[i]);
+          main(i+1);
+          path.pop();
+        }
+      }
+      main(0);
+      return res;
+    }
+
+    console.log(subsets([1,2,3]));
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    组合求和2
+    1.数据存在重复，数据只能选择一次
+
+    */
+    var combinationSum2 = function(candidates, target) {
+      let res = [];
+      let path = [];
+      const judge = (big,small) => {
+        for(let i=0;i<big.length;i++) {
+          let tmp = true;
+          for(let j=0;j<big[i].length;j++) {
+            if(big[i][j] !== small[j]) tmp = false;
+          }
+          if(tmp) return tmp;
+        }
+        return false;
+      }
+      const main = (index,sum) => {
+        if(sum===target){
+          let tmp = path.slice().sort((a,b)=>{return a-b;});
+          if(!judge(res,tmp)) res.push(tmp); 
+          return ;
+        }
+
+        for(let i=index;i<candidates.length;i++) {
+          if(sum+candidates[i]>target) continue ;
+          path.push(candidates[i]);
+          sum += candidates[i];
+          main(i+1,sum);
+          path.pop();
+          sum -= candidates[i];
+        }
+      }
+      main(0,0);
+      return res;
+    }
+
+    console.log(combinationSum2([10,1,2,7,6,1,5],8))
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    组合的和问题
+    给定一组数据[2,3,6,7]和一个目标值target7,数据的值可以多次选择，求出选择的数据和等于target的数组
+    1.此问题的组合没有个数说明
+    2.只有满足和的要求就可以
+    */
+    var combinationSum = function(candidates, target) {
+      let res = [];
+      let path = [];
+      const judge = (big,small) => {
+        for(let i=0;i<big.length;i++) {
+          let tmp = true;
+          for(let j=0;j<big[i].length;j++) {
+            if(big[i][j] !== small[j]) tmp = false;
+          }
+          if(tmp) return tmp;
+        }
+        return false;
+      }
+      const main = (index,sum) => {
+        if(sum===target){
+          let tmp = path.slice().sort((a,b)=>{return a-b;});
+          if(!judge(res,tmp)) res.push(tmp); 
+          return ;
+        }
+
+        for(let i=index;i<candidates.length;i++) {
+          if(sum+candidates[i]>target) continue ;
+          path.push(candidates[i]);
+          sum += candidates[i];
+          main(i,sum);
+          path.pop();
+          sum -= candidates[i];
+        }
+      }
+      main(0,0);
+      return res;
+    }
+
+    console.log(combinationSum([2,3,6,7],7));
+  </script>
+</body>
+</html>

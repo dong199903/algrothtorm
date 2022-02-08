@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    全排列问题2
+    数据存在重复，但是排列不可以重复
+    [1,1,2]--[1,1,2] [1,2,1] [2,1,1]
+    */
+    var permuteUnique = function(nums) {
+      let result = [];
+      let path = [];
+
+      const judge = (big,small) => {
+        //开始折算了吧
+        for(let i=0;i<big.length;i++) {
+          let tmp = true;//相等
+          for(let j=0;j<big[i].length;j++) {
+            if(big[i][j]!==small[j]){ tmp=false;break;}
+          }
+          if(tmp) return tmp;
+        }
+        return false;
+      }
+      const main = (used) => {
+        if(path.length===nums.length){
+          if(!judge(result,path)) result.push([...path]);
+          return ;
+        }
+        for(let i=0;i<nums.length;i++) {
+          if(used[i]) continue;
+          used[i] = true;
+          path.push(nums[i]);
+          main(used);
+          used[i] = false;
+          path.pop();
+        }
+      }
+      main([]);
+
+      return result;
+    }
+
+    console.log(permuteUnique([1,1,2]));
+  </script>
+</body>
+</html>
