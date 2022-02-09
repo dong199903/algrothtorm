@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    分发糖果
+    [1,0,2]代表孩子评分
+    1.每个孩子至少1个糖
+    2.相邻两个孩子，分数高的必须获得更多的糖
+    3.求满足最少的糖果
+
+    方案：
+    1.先从前往后遍历，右边大于左边，则糖果多
+    2.从后给前遍历，左边大于右边，则糖果多
+    3.记住，最后从后往前，还要考虑满足前面的，所以是选择最大的方案
+    */
+    var candy = function(ratings) {
+      let res = new Array(ratings.length).fill(1);
+
+      for(let i=1;i<res.length;i++) {
+        if(ratings[i]>ratings[i-1]) {
+          res[i] = res[i-1] + 1;
+        }
+      }
+
+      for(let i=res.length-2;i>=0;i--) {
+        if(ratings[i]>ratings[i+1]) {
+          res[i] = Math.max(res[i+1] + 1,res[i]); 
+        }
+      }
+      return res.reduce((count,value)=>{
+        return count+value;
+      },0)
+    };
+   
+  </script>
+</body>
+</html>

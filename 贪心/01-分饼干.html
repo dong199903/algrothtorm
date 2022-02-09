@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    g表示满足孩子的最小需求
+    s表示饼干的尺寸
+    求出最大满足孩子的个数
+    */
+    var findContentChildren = function(g, s) {
+      g.sort((a,b)=>{return a-b});
+      s.sort((a,b)=>{return a-b});
+      //从s找到第一个可以满足g的位置
+      let len1,len2,i,j,count;
+      len1 = g.length;
+      len2 = s.length;
+      i=j=count=0;
+      while(i<len1 && j<len2) {
+        while(j<len2 && s[j]<g[i]) j++;
+        if(j<len2) {
+          count++;
+          i++;
+          j++;
+        }
+      }
+      return count;
+    }; 
+    console.log(findContentChildren([1,2],[1,2,3]));
+  </script>
+</body>
+</html>

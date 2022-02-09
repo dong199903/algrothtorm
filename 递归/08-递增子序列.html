@@ -16,8 +16,40 @@
     4.组合问题的改进
     */
     var findSubsequences = function(nums) {
-      
+      let res = [];
+      let path = [];
+
+      const judge = (big,small) => {
+        if(!big.length) return false;
+        for(let i=0;i<big.length;i++) {
+          if(big[i].length!==small.length) continue;
+          let tmp = true;
+          for(let j=0;j<big[i].length;j++) {
+            if(big[i][j]!==small[j]) {tmp=false;break;}
+          }
+          if(tmp) return tmp;
+        }
+        return false;
+      }
+      const main = (index) => {
+         if(path.length>=2){
+           if(!judge(res,path))
+            res.push([...path]);
+           
+         }
+         for(let i=index;i<nums.length;i++) {
+           let tmp = 0;
+           if(path.length===0) {path.push(nums[i]);tmp=1}
+           else if(nums[i]>=path[path.length-1]) {path.push(nums[i]);tmp=1}
+           main(i+1);
+           if(tmp===1) path.pop();
+           
+         }
+      }
+      main(0);
+      return res;
     };
+    console.log(findSubsequences([4,4,3,2,1]));
   </script>
 </body>
 </html>

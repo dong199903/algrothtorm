@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    跳跃游戏
+    [2,3,1,1,4]
+    最初位于第一个位置，对应下标表示可以跳跃的最大跳数，判断是否可以到达数组末尾
+    1.定义一个跳跃范围
+    2.遍历数组，找到最大的，如果跳出去，成立
+    */
+    var canJump = function(nums) {
+      if(nums.length===1) return true;
+      let jump = 0;//可以跳的范围
+      for(let i=0;i<=jump;i++) {
+        jump = Math.max(jump,i+nums[i]);
+        if(jump>=nums.length-1) return true;
+      }
+      return false;
+    };
+  </script>
+</body>
+</html>
