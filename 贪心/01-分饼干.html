@@ -12,6 +12,10 @@
     g表示满足孩子的最小需求
     s表示饼干的尺寸
     求出最大满足孩子的个数
+
+    思路：
+    1.g和s数组从小到大排序
+    2.g和s同时遍历，找可以满足的位置
     */
     var findContentChildren = function(g, s) {
       g.sort((a,b)=>{return a-b});

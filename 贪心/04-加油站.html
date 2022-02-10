@@ -10,11 +10,36 @@
   <script>
     /**
      * 加油站问题
+     * 1.gas数组保存每个站点可以加油的量
+     * 2.cost数组保存到达站点耗费的油量
+     * 
+     * 找到一个开始位置，可以成功走一圈每个站点
+     * 
+     * 思路；暴力解决
      * 
     */
     var canCompleteCircuit = function(gas, cost) {
-      
+      for(let i=0;i<gas.length;i++) {
+        let count = 0;
+        let sum = 0;
+        let begin = i;
+        while(count!=gas.length) {
+          if(begin>=gas.length) {
+            begin = begin % gas.length;
+          }
+          sum += gas[begin]-cost[begin];
+          count++;
+          begin++;
+          if(sum<0) {
+            break;
+          }
+        }
+        if(sum>=0) return i;
+      }
+      return -1;
     };
+
+    console.log(canCompleteCircuit([2,3,4],[3,4,3]));
   </script>
 </body>
 </html>
