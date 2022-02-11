@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    数组的所有元素右循环平移k个位置
+
+    方案：
+    1.后k个翻转，
+    2.前面剩余的翻转
+    3.整体翻转
+    */
+    var rotate = function(nums, k) {
+      if(nums.length===0 || nums.length===1) return ;
+      if(k>nums.length) k=k%nums.length;
+      let arr1,arr2,count1,count2,i,j,data;
+      arr1 = [],arr2 = [];
+      count1 = nums.length-k;
+      count2 = k;
+      i = count1-1;
+      j = nums.length-1;
+      while(i>=0) {
+        arr1.push(nums[i]);
+        i--;
+      }
+      while(j>=count1) {
+        arr2.push(nums[j]);
+        j--;
+      }
+      data = [];
+      data.push(...arr1,...arr2);
+      data.reverse();
+      for(let i=0;i<nums.length;i++) {
+        nums[i] = data[i];
+      }
+    };
+    rotate([1,2,3,4,5,6,7],3);
+  </script>
+</body>
+</html>

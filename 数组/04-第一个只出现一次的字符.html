@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //第一个只出现一次的字符 参数是字符串
+    var firstUniqChar = function(s) {
+      //1.字符串转换数组
+      if(!s.length) return " ";
+      let obj = s.split("").reduce((now,val)=>{
+        if(now[val]){
+          now[val]++;
+        }else now[val] = 1;
+        return now;
+      },{})
+      for(let key in obj) {
+        if(obj[key]===1) return key;
+      }
+      return " ";
+    };
+    console.log(firstUniqChar("abaccdeff"));
+  </script>
+</body>
+</html>

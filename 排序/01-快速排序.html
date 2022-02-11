@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var sortArray = function(nums) {
+      const part = (low,high) => {
+        let tmp = nums[low];
+        while(low<high){
+          while(low<high && nums[high]>=tmp) {
+            high--;
+          }
+          if(low<high) {
+            nums[low++] = nums[high];
+          }
+
+          while(low<high && nums[low]<tmp) {
+            low++;
+          }
+          if(low<high) {
+            nums[high--] = nums[low];
+          }
+        }
+        nums[low] = tmp;
+        return low;
+      }
+
+      const main = (low,high) => {
+        if(low<high) {
+          let index = part(low,high);
+          main(low,index-1);
+          main(index+1,high);
+        }
+      }
+
+      main(0,nums.length-1);
+      return nums;
+    };
+    console.log(sortArray([1,4,2,3,5]));
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    归并排序
+    1.先求中间数，划分左右区间，递归划分
+    2.归并左右区间
+    */
+    var sortArray = function(nums) {
+        const merge = (low,mid,high) => {
+          //low,mid
+          //mid+1 high
+          let i = low;
+          let j = mid+1;
+          let tmp = [];
+          while(i<=mid && j<=high) {
+            if(nums[i]<nums[j]) {
+              tmp.push(nums[i]);
+              i++;
+            }else if(nums[i]>nums[j]) {
+              tmp.push(nums[j]);
+              j++;
+            }else {
+              tmp.push(nums[i],nums[i]);
+              i++;
+              j++;
+            }
+          }
+          //重新拷贝回去
+          let index = low;
+          while(tmp.length) {
+            let val = tmp.shift();
+            nums[index++] = val;
+          }
+        }
+
+        const main = (low,high) => {
+          if(low<high) {
+            let mid = Math.floor((low+high)/2);
+            main(low,mid);
+            main(mid+1,high);
+            merge(low,mid,high);
+          }
+        }
+        main(0,nums.length-1);
+        return nums;
+    };
+    console.log(sortArray([1,4,2,3,5]));
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var mergeTwoLists = function(l1, l2) {
+      if(!l1) return l2;
+      if(!l2) return l1;
+      let p,q,h,tmp;
+      p = l1,q=l2;
+      //先确定一个头
+      if(l1.val<l2.val) {h=l1,p=p.next} else {h=l2;q=q.next}
+      tmp = h;
+      while(p && q) {
+        if(p.val<q.val) {
+          tmp.next = p;
+          tmp = p;
+          p = p.next;
+        }else if(p.val>q.val) {
+          tmp.next = q;
+          tmp = q;
+          q = q.next;
+        }else {
+          tmp.next = p;
+          tmp = p;
+          p = p.next;
+          tmp.next = q;
+          tmp = q;
+          q = q.next;
+        }
+      }
+      while(p) {
+        tmp.next = p;
+        tmp = p;
+        p = p.next;
+      }
+      while(q) {
+        tmp.next = q;
+        tmp = q;
+        q = q.next;
+      }
+      return h;
+    }
+  </script>
+</body>
+</html>
