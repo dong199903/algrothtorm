@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    判断是否是合法出栈序列
+    1.设置一个栈一次保存入栈序列
+    2.当入栈值和出栈序列头部元素相同时，持续删除
+    3.序列遍历如果空，则是合法的
+    */
+    var validateStackSequences = function(pushed, popped) {
+      let res = [];
+      
+      for(let i=0;i<pushed.length;i++) {
+        res.push(pushed[i]);
+        while(res.length!==0 && res[res.length-1]===popped[0]) {
+          res.pop();
+          popped.shift();
+        }
+      }
+      return res.length===0;
+    };
+    /*
+    1 2 3 4 5 
+    4 5 3 2 1
+    1 2 3
+    
+    */
+    console.log(validateStackSequences([2,1,0],[1,2,0]));
+  </script>
+</body>
+</html>

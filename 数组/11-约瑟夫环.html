@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    n个人 数到m的出去，下次从被删除位置开始计数
+    返回最后人的编号。初始编号从 0,1,...n-1
+    */
+    var lastRemaining = function(n, m) {
+      let arr = new Array(n);
+      let count,index;
+      for(let i=0;i<arr.length;i++) arr[i] = i;
+      //0 1 2 3 4
+      index = 0;
+      while(arr.length!=1) { //剩余1个人退出
+        count = 1;
+        while(count<m) {
+          count++;
+          index++;
+          if(index>=arr.length) index = index % arr.length;
+        }
+        arr.splice(index,1);
+        console.log(arr,count,index);
+      }
+      return arr[0];
+    };
+    console.log(lastRemaining(10,17));
+  </script>
+</body>
+</html>

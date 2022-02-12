@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    后缀表达式求值
+    1.如果是数字，直接入栈
+    2.如果是符号，连续出栈两个值，结果入栈
+    3.最后得出栈结果
+    */
+    var evalRPN = function(tokens) {
+      let res = [];//栈
+      let num1,num2;
+      for(let i=0;i<tokens.length;i++) {
+        if(tokens[i]==="+") {
+          num1 = res.pop();
+          num2 = res.pop();
+          res.push(String(Number(num1)+Number(num2)));
+          
+          continue;
+        }
+        if(tokens[i]==="-") {
+          num1 = res.pop();
+          num2 = res.pop();
+          res.push(String(Number(num2)-Number(num1)));
+          
+          continue;
+        }
+        if(tokens[i]==="*") {
+          num1 = res.pop();
+          num2 = res.pop();
+          res.push(String(Number(num1)*Number(num2)));
+          
+          continue;
+        }
+        if(tokens[i]==="/") {
+          num1 = res.pop();
+          num2 = res.pop();
+          res.push(String(parseInt(Number(num2) / Number(num1))));
+         
+          continue;
+        }
+        //操作数
+        res.push(tokens[i]);
+        
+      }
+      return Number(res[0]);
+    };
+    
+    evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]);
+    //10 6 -132 / * 17 + 5 +
+  </script>
+</body>
+</html>

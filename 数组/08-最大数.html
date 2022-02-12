@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //数组各个项拼接最大数--返回字符串
+    //1.最大数按字符串比较完成
+    //2.细节 3和30比较如果按字符串是303，但是实际330大，因此需要采取两个数字拼接字符串进行比较排序
+    var largestNumber = function(nums) {
+      nums.sort((a,b)=>{
+        let item1 = a+""+b;
+        let item2 = b+""+a;
+        if(item1===item2)return 0;
+        else if(item1>item2) return -1;
+        return 1;
+      })
+      
+      let str = nums.join("");
+      if(str[0]==='0')return "0";
+      return str;
+    }
+    console.log(largestNumber([3,30,34,5,9]));
+  </script>
+</body>
+</html>

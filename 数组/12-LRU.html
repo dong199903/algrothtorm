@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    方案：用map保存，满了始终删除开头的
+    */
+      var LRUCache = function(capacity) {
+        this.size = capacity;
+        this.map = new Map();
+      };
+
+  /** 
+   * @param {number} key
+   * @return {number}
+   */
+  LRUCache.prototype.get = function(key) {
+      let tmp = this.map.has(key);
+      if(!tmp) return -1;
+      //获取的时候，先删除，后插入最后
+      let val = this.map.get(key);
+      this.map.delete(key);
+      this.map.set(key,val);
+      return val;
+  };
+
+  /** 
+   * @param {number} key 
+   * @param {number} value
+   * @return {void}
+   */
+  LRUCache.prototype.put = function(key, value) {
+    //如果相同，则更新，先删除，后插入
+      let tmp = this.map.has(key);
+      if(tmp) {
+        let val = this.map.get(key);
+        this.map.delete(key);
+        this.map.set(key,value);
+        return ;
+      }
+      if(this.map.size<this.size)
+        this.map.set(key,value);
+      else {
+        //删除第一个
+        this.map.delete(this.map.keys().next().value);
+        this.map.set(key,value);
+      }
+  };
+  </script>
+</body>
+</html>
