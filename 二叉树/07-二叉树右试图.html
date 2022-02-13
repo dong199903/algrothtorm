@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var rightSideView = function(root) {
+      let res = [];
+      let que = [];
+      if(!root) return [];
+      if(!root.left && !root.right) return [root.val];
+
+      que.push(root);
+      while(que.length) {
+        let len = que.length;
+        for(let i=0;i<len;i++) {
+          let tmp = que.shift();
+          if(i===len-1) {
+            res.push(tmp.val);
+          }
+          if(tmp.left) que.push(tmp.left);
+          if(tmp.right) que.push(tmp.right);
+        }
+      }
+      return res;
+    };
+  </script>
+</body>
+</html>

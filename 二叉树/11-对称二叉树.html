@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //对称二叉树
+    /*
+    1.用层序遍历的逻辑
+    2.当前层某个结点是空，不管，不是空结点其左右孩子加入队列
+    3.当前层数组按照回文判断。
+    */
+    function TreeNode(val, left, right) {
+      this.val = (val===undefined ? 0 : val)
+      this.left = (left===undefined ? null : left)
+      this.right = (right===undefined ? null : right)
+    }
+    var isSymmetric = function(root) {
+      if(!root || !root.left && !root.right) return true;
+      let que = [];
+      que.push(root);
+      while(que.length) {
+        let tmp = [];
+        let len = que.length;
+        for(let i=0;i<len;i++) {
+          let q = que.shift();
+          tmp.push(q);
+          
+          if(q) {
+            que.push(q.left);
+            que.push(q.right);
+          }
+        }
+        
+        //判断对称与否
+        while(tmp.length) {
+          let p = tmp.shift();
+          let q = tmp.pop();
+          
+          if(p===null && q!=null || p!==null && q===null) return false;
+          if(p && q && p.val!==q.val) return false; 
+        }
+      }
+      return true;
+    }
+
+    let r = new TreeNode(1);
+    r.left = new TreeNode(2);
+    r.right = new TreeNode(2);
+    console.log(isSymmetric(r));
+    
+  </script>
+</body>
+</html>

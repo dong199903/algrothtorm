@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //根到叶子所有路径--回溯思路完成（先序）
+    var binaryTreePaths = function(root) {
+      let res = [];
+      let path = [];
+      const main = (node) => {
+        if(node) {
+          if(!node.left && !node.right) {
+            path.push(node.val);
+            res.push(path.slice(0).join(""));
+          }else{
+            path.push(node.val+"->");
+          }
+          main(node.left);
+          main(node.right);
+          path.pop();
+        }
+      }
+      main(root);
+      
+      return res;
+    }
+  </script>
+</body>
+</html>

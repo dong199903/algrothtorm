@@ -10,7 +10,18 @@
   <script>
     //有效的括号-string
     var isValid = function(s) {
-      
+      let res = [];
+      for(let i=0;i<s.length;i++) {
+        if(s[i]==='(' || s[i]==='[' || s[i]==='{') {
+          res.push(s[i]);
+        }else{
+          let tmp = res.pop();
+          if(s[i]===')' && tmp!=='(' || s[i]===']' && tmp!=='[' || s[i]==='}' && tmp!=='{') {
+            return false;
+          }
+        }
+      }
+      return res.length===0;
     }
   </script>
 </body>

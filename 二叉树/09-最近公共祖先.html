@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //最近公共祖先
+    /*
+    0.map结构，对层序遍历的结点，每个都保存其父亲
+    1.采用队列，结束条件是p和q都在map找到了
+    3.先用数组保存p到根的路径结点
+    4.遍历q到根路径上的结点，看是否存在于p路径数组，存在直接返回
+    */
+    var lowestCommonAncestor = function(root, p, q) {
+      if(!root || p===root || q===root) return root;
+      let m = new Map();
+      let que = [];
+      m.set(root,null);//标记父亲
+      que.push(root);
+      while(!(m.has(p) && m.has(q))) {
+        let tmp = que.shift();
+        if(tmp.left){
+          m.set(tmp.left,tmp);
+          que.push(tmp.left);
+        }
+        if(tmp.right){
+          m.set(tmp.right,tmp);
+          que.push(tmp.right);
+        }
+      }
+      //从下往上找到根 res保存路径
+      let res = [];
+      while(p){
+        res.push(p);
+        p = m.get(p);
+      }
+      while(res.indexOf(q)===-1){
+        q = m.get(q);
+      }
+      return q;
+    }
+  </script>
+</body>
+</html>

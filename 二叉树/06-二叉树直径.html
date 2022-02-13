@@ -8,23 +8,21 @@
 </head>
 <body>
   <script>
-    //判断一个二叉树是否是平衡二叉树
+    //二叉树直径：按求高度的思路走
+    var diameterOfBinaryTree = function(root) {
 
-    //算法：左右高度不超过1，可以按求高度的算法完成
-    var isBalanced = function(root) {
-      let isBalanced = true;
+      let max = 0;
+
       const main = (node) => {
         if(node) {
           let left = main(node.left);
           let right = main(node.right);
-          if(Math.abs(left-right)>1) isBalanced = false;
+          max = Math.max(max,left+right);
           return left>right?left+1:right+1;
-        }
-        return 0;
-      
+        }return 0;
       }
       main(root);
-      return isBalanced===true;
+      return max;
     }
   </script>
 </body>

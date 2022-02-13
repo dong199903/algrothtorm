@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    大数相加
+    */
+    var addStrings = function(num1, num2) {
+      let len1,len2,res,jin;
+      len1 = num1.length-1,len2 = num2.length-1;
+      res = [];
+      jin = 0;
+      while(len1>=0 && len2>=0) {
+        let tmp = Number(num1[len1]) + Number(num2[len2]) + jin;
+        if(tmp>=10) {jin=1;res.push(tmp-10)}
+        else {jin=0;res.push(tmp)}
+        len1--;
+        len2--;
+      }
+      while(len1>=0) {
+        let tmp = Number(num1[len1]) + jin;
+        if(tmp>=10) {jin=1;res.push(tmp-10)}
+        else {jin=0;res.push(tmp)}
+        len1--;
+      }
+
+      while(len2>=0) {
+        let tmp = Number(num2[len2]) + jin;
+        if(tmp>=10) {jin=1;res.push(tmp-10)}
+        else {jin=0;res.push(tmp)}
+        len2--;
+      }
+
+      if(jin===1) res.push(1);
+      return res.reverse().join("");
+    };
+
+    console.log(addStrings("0","0"));
+  </script>
+</body>
+</html>

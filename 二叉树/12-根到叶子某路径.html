@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //找出根到叶子和等于某个数的所有路径
+
+    //总结：有数组，必有回溯，普通参数初始化修改就可以
+    var pathSum = function(root, target) {
+      let res = [];
+      let path = [];
+
+      const main = (node,sum) => {
+        if(node) {
+          sum += node.val;
+          path.push(node.val);
+          if(!node.left && !node.right) {
+            if(sum===target) res.push([...path]);
+            sum = 0;
+          }
+          main(node.left,sum);
+          main(node.right,sum);
+          path.pop();
+        }
+      }
+     main(root,0);
+     return res;
+    }
+  </script>
+</body>
+</html>
