@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    删除相邻字符串
+    abbac-->c
+    */
+    var removeDuplicates = function(s) {
+      let res = [];
+      if(!s.length || s.length===1) return s;
+      res.push(s[0]);
+      for(let i=1;i<s.length;i++) {
+        if(s[i]!==res[res.length-1]) {
+          res.push(s[i])
+        }else{
+          res.pop();
+        }
+      }
+      return res.join("");
+    };
+  </script>
+</body>
+</html>

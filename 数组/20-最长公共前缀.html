@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //最长公共前缀
+    /*
+    "abc" "abd" "abe"  ->ab
+
+    思考：
+    1.以第一个字符串为标准遍历
+    2.如其余每个当前索引值都和第一个相同，加入当前字符
+      否则结束
+    3.返回结果
+    */
+    var longestCommonPrefix = function(strs) {
+      let len = strs[0].length;
+      let res = [];
+      for(let i=0;i<len;i++) {
+        let j;
+        for(j=1;j<strs.length;j++) {
+          if(strs[j][i]!==strs[0][i]) break;
+        }
+        if(j<strs.length) return res.join("");
+        res.push(strs[0][i]);
+      }
+      return res.join("");
+    };
+  </script>
+</body>
+</html>

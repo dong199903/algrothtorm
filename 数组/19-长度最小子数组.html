@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    长度最小子数组（全是正整数） ：最短子数组和>=target
+
+    
+    target = 7, nums = [2,3,1,2,4,3] 最短满足和的子数组是[4,3]长度是2
+
+    1.滑动窗口
+    2.右边界不断增加，并累加和sum
+    3.当sum满足条件时，判断最短数组，并将左边界不断增加，并判断是否满足
+    4.右边界到达数组末尾结束
+    */
+    var minSubArrayLen = function(target, nums) {
+      let begin = 0;
+      let sum = 0;
+      let min = Number.MAX_VALUE;
+      for(let i=0;i<nums.length;i++) {
+        sum += nums[i];
+
+        while(sum>=target) {
+          min = Math.min(i-begin+1,min);
+          sum-=nums[begin];
+          begin++;
+        }
+      }
+      if(min!==Number.MAX_VALUE) return min;return 0;
+    };
+  </script>
+</body>
+</html>
