@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    1.二维数组从左上角走到右小角，只能右或者下走一步
+    2.求最小路径和
+
+    算法
+    0.第一行和第一列和先预处理
+    1.dp[i][j] = min(dp[i-1][j],dp[i][j-1]) + num[i][j]
+    */
+    var minPathSum = function(grid) {
+      let m,n;
+      m = grid.length,n = grid[0].length;
+      let arr = Array.from(new Array(m),item=>{return new Array(n).fill(0)});
+      //1.处理第一行和第一列
+      let sum = 0;
+      for(let i=0;i<n;i++){
+        sum += grid[0][i];
+        arr[0][i] = sum;
+      }
+      sum = 0;
+      for(let i=0;i<m;i++){
+        sum += grid[i][0];
+        arr[i][0] = sum;
+      }
+      //2.循环处理
+      for(let i=1;i<m;i++){
+        for(let j=1;j<n;j++){
+          arr[i][j] = Math.min(arr[i-1][j],arr[i][j-1]) + grid[i][j];
+        }
+      }
+      return arr[m-1][n-1];
+    };
+  </script>
+</body>
+</html>

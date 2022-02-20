@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    1.不同路径1的基础上，网格存在障碍物数字1表示有障碍物
+    2.问有多少种路径
+
+    算法
+    1.dp[i][j]初始全部是0
+    2.第一行和第一列没有障碍时初始化1，当碰到障碍物，该位置和后面所有都是0
+    3.dp[i][j] = dp[i-1][j]+dp[i][j-1] (如果有障碍，直接是0)
+    */
+    var uniquePathsWithObstacles = function(obstacleGrid) {
+      let m = obstacleGrid.length;
+      let n = obstacleGrid[0].length;
+      let arr = Array.from(new Array(m),item=>new Array(n).fill(0));
+      for(let i=0;i<m && obstacleGrid[i][0]===0;i++){
+        arr[i][0] = 1;
+      }
+      for(let i=0;i<n && obstacleGrid[0][i]===0;i++){
+        arr[0][i] = 1;
+      }
+      for(let i=1;i<m;i++){
+        for(let j=1;j<n;j++){
+          if(obstacleGrid[i][j]===1) arr[i][j]=0;
+          else arr[i][j] = arr[i-1][j]+arr[i][j-1];
+        }
+      }
+      return arr[m-1][n-1];
+    };
+  </script>
+</body>
+</html>

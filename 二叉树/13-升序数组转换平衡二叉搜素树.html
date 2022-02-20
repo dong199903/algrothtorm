@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    1.数组是有序的，首先找到根在最中间位置
+    2.递归左右分区
+    */
+    var sortedArrayToBST = function(nums) {
+        const main = (node) => {
+          if(node.length){
+            let mid = parseInt(node.length/2);//中间位置
+            let root = new TreeNode(node[mid]);
+            root.left = main(node.slice(0,mid));
+            root.right = main(node.slice(mid+1));
+            return root;
+          }return null;
+        }
+        return main(nums);
+    } ;
+  </script>
+</body>
+</html>

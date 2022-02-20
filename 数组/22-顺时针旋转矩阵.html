@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    顺时针旋转矩阵90度
+
+    算法
+    1.矩阵转置
+    2.矩阵按列逆序
+    */
+    var rotate = function(matrix) {
+      for(let i=0;i<matrix.length;i++) {
+        for(let j=0;j<i;j++) {
+          let tmp = matrix[i][j];
+          matrix[i][j] = matrix[j][i];
+          matrix[j][i] = tmp;
+        }
+      }
+       let len = matrix.length;
+      for(let i=0;i<Math.floor(len/2);i++){ //第几列
+        for(let j=0;j<len;j++) {//第几行
+          let tmp = matrix[j][i];
+          matrix[j][i] = matrix[j][len-i-1];
+          matrix[j][len-i-1] = tmp;
+        }
+      }
+    };
+  </script>
+</body>
+</html>

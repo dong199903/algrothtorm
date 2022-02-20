@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    不同路径
+    1.从最左上角走到最右小角
+    2.只能向右或者下走
+    3.问路径有多少种
+
+    算法
+    1.dp[0][i] = dp[i][0] = 1;  第一行和第一列初始化为1
+    2.dp[i][j] = dp[i-1][j]+dp[i][j-1]
+    3.dp[len-1][len-1]就是保存的结果
+    */
+
+    var uniquePaths = function(m, n) {
+      let arr = Array.from(new Array(m),item=>new Array(n).fill(0));
+      for(let i=0;i<m;i++){
+        arr[i][0] = 1;
+      }
+      for(let i=0;i<n;i++){
+        arr[0][i] = 1;
+      }
+      for(let i=1;i<m;i++){
+        for(let j=1;j<n;j++){
+          arr[i][j] = arr[i-1][j]+arr[i][j-1];
+        }
+      }
+      return arr[m-1][n-1];
+
+    }
+  </script>
+</body>
+</html>

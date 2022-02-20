@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    两个二叉树，合并他们各自结点的和
+    */
+    function mergeTrees( t1 ,  t2 ) {
+       // write code here
+      if(!t1) return t2;
+      if(!t2) return t1;
+      
+      const main = (node1,node2) => {
+          if(!node1) return node2;
+          if(!node2) return node1;
+          
+          let r = new TreeNode(node1.val+node2.val);
+          r.left = main(node1.left,node2.left);
+          r.right = main(node1.right,node2.right);
+          return r;
+      }
+      
+      return main(t1,t2);
+    }
+  </script>
+</body>
+</html>

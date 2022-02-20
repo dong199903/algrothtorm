@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    环形链表的入口结点
+    1.首先按环形链表判断写，快慢指针相遇的地方 node1
+    2.head和node1同时每次走一步，二者相遇就是入口地方
+    */
+    var detectCycle = function(head) {
+      if(!head || !head.next) return null;
+      let p,q,s;
+      p = q = head;
+      while(p) {
+          q = q.next;
+          if(!p.next){
+              s = null;
+              break;
+          }else{
+              p = p.next.next;
+          }
+          if(p===q){
+              s = p;
+              break;
+          }
+      }
+      if(!p) s=null;
+      if(!s) return null;
+      while(s!==head){
+          s = s.next;
+          head = head.next;
+      }
+      return s;
+  };
+  </script>
+</body>
+</html>
