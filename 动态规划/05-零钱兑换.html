@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script> 
+  /*
+  给定一个金额和一个数组表示不同面额的硬币，求最少个数硬币可以凑出金额
+  0.dp[i]表示凑够金额i最少需要的硬币个数
+  1.dp[i] = min(dp[i],dp[i-m[j]]+1)
+  */
+    var coinChange = function(coins, amount) {
+      let res = new Array(amount+1).fill(Number.MAX_VALUE);
+      res[0] = 0;
+
+      for(let i=0;i<coins.length;i++){
+        for(let j=coins[i];j<=amount;j++){
+          res[j] = Math.min(res[j],res[j-coins[i]]+1);
+        }
+      }
+
+      return res[amount]===Number.MAX_VALUE?-1:res[amount];
+    };
+   
+
+  </script>
+</body>
+</html>
