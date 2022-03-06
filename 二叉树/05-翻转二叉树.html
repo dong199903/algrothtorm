@@ -10,19 +10,18 @@
   <script>
     //思路：先序遍历
     var invertTree = function(root) {
-      if(!root || !root.left && !root.right) return root;
+      
 
       const main = (node) => {
         if(node) {
-          let tmp = node.left;
-          node.left = node.right;
-          node.right = tmp;
-          main(node.left);
-          main(node.right);
+          let left = node.left;
+          let right = node.right;
+          node.left = main(right);
+          node.right = main(left);
         } 
+        return node;
       }
-      main(root);
-      return root;
+      return main(root);
     }
   </script>
 </body>
